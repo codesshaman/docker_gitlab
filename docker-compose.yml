@@ -1,0 +1,34 @@
+version: "2.1"
+services:
+  duplicati:
+    image: linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=0 # 0 for root
+      - PGID=0 # 1000 for first user
+      - TZ=Europe/Moscow
+      - CLI_ARGS= #optional
+    volumes:
+      - config-volume:/config
+      - backups-volume:/backups
+      - sources-volume:/source
+    ports:
+      - 8200:8200 # Change first port for more security
+    restart: unless-stopped
+
+volumes:
+  config-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: ${CONF_PATH}
+  backups-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: ${BCKP_PATH}
+  sources-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: ${SRC_PATH}
