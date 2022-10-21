@@ -1,34 +1,17 @@
-version: "2.1"
+version: '3'
 services:
-  duplicati:
-    image: linuxserver/duplicati:latest
-    container_name: duplicati
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'localhost'
     environment:
-      - PUID=0 # 0 for root
-      - PGID=0 # 1000 for first user
-      - TZ=Europe/Moscow
-      - CLI_ARGS= #optional
-    volumes:
-      - config-volume:/config
-      - backups-volume:/backups
-      - sources-volume:/source
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost'
+        gitlab_rails['gitlab_shell_ssh_port'] = 42
     ports:
-      - 8200:8200 # Change first port for more security
-    restart: unless-stopped
-
-volumes:
-  config-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: ${CONF_PATH}
-  backups-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: ${BCKP_PATH}
-  sources-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: ${SRC_PATH}
+      - '80:80'
+      - '22:22'
+    volumes:
+      - '/opt/gitlab/config:/etc/gitlab'
+      - '/opt/gitlab/logs:/var/log/gitlab'
+      - '/opt/gitlab/data:/var/opt/gitlab'
