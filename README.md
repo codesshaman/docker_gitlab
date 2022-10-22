@@ -1,10 +1,16 @@
 # Gitlab container
 
-### Step 1: create .env file
+> Configure this container following the [official guide](https://docs.gitlab.com/ee/install/docker.html "gitlab + docker")
 
-``mv .env.sample .env``
+### Step 1: create mounted folders
 
-``nano .env``
+```
+sudo mkdir /opt/gitlab/ && \
+sudo mkdir /opt/gitlab/config && \
+sudo mkdir /opt/gitlab/logs && \
+sudo mkdir /opt/gitlab/data
+```
 
-Configure this file following the [official guide](https://docs.gitlab.com/ee/install/docker.html "gitlab + docker")
+### Step 2: 
+
 
