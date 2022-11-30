@@ -1,4 +1,4 @@
-name = Duplicati
+name = GitLab
 
 No_color=\033[0m		# Color Reset
 Color_Off='\e[0m'       # Color Off
