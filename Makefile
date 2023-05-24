@@ -36,7 +36,7 @@ down:
 	@docker-compose -f ./docker-compose.yml down
 
 ps:
-	@printf "$(OK_COLOR)==== Rebuild configuration ${name}... ====$(NO_COLOR)\n"
+	@printf "$(OK_COLOR)==== View configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml ps
 
 re:	down
