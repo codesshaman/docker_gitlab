@@ -1,18 +1,38 @@
-version: '3'
+version: '3.5'
 services:
-  web:
-    image: 'gitlab/gitlab-ce:latest'
-    restart: always
-    hostname: 'localhost'
-    container_name: gitlab
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    hostname: $GITLAB_HOST
+    restart: unless-stopped
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost'
-        gitlab_rails['gitlab_shell_ssh_port'] = 42
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
+        external_url "https://$GITLAB_URL:443"
     ports:
-      - '80:80'
-      - '22:22'
+      - "$GITLAB_HTTPS:443"
+      - "$GITLAB_HTTP:80"
+      - "$GITLAB_SSH:22"
     volumes:
-      - '/opt/gitlab/config:/etc/gitlab'
-      - '/opt/gitlab/logs:/var/log/gitlab'
-      - '/opt/gitlab/data:/var/opt/gitlab'
+      - $GITLAB_HOME/gitlab/etc/gitlab:/etc/gitlab
+      - $GITLAB_HOME/gitlab/var/opt/gitlab:/var/opt/gitlab
+      - $GITLAB_HOME/gitlab/var/log/gitlab:/var/log/gitlab
+    container_name: $GITLAB_CONTAINER_NAME
+    networks:
+      - gitlab_net
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    restart: unless-stopped
+    depends_on:
+      - gitlab
+    volumes:
+      - $GITLAB_HOME/gitlab/etc/gitlab-runner:/etc/gitlab-runner
+      - $GITLAB_HOME/gitlab/var/run/docker.sock:/var/run/docker.sock
+    container_name: $GITLAB_RUNNER_NAME
+    networks:
+      - gitlab_net
+
+networks:
+  gitlab_net:
+    external:
+      name: $GITLAB_NETWORK
