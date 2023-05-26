@@ -13,9 +13,9 @@ services:
       - "$GITLAB_HTTP:80"
       - "$GITLAB_SSH:22"
     volumes:
-      - $GITLAB_HOME/gitlab/etc/gitlab:/etc/gitlab
-      - $GITLAB_HOME/gitlab/var/opt/gitlab:/var/opt/gitlab
-      - $GITLAB_HOME/gitlab/var/log/gitlab:/var/log/gitlab
+      - $GITLAB_HOME/etc/gitlab:/etc/gitlab
+      - $GITLAB_HOME/var/opt/gitlab:/var/opt/gitlab
+      - $GITLAB_HOME/var/log/gitlab:/var/log/gitlab
     container_name: $GITLAB_CONTAINER_NAME
     networks:
       - gitlab_net
@@ -26,8 +26,8 @@ services:
     depends_on:
       - gitlab
     volumes:
-      - $GITLAB_HOME/gitlab/etc/gitlab-runner:/etc/gitlab-runner
-      - $GITLAB_HOME/gitlab/var/run/docker.sock:/var/run/docker.sock
+      - $GITLAB_HOME/etc/gitlab-runner:/etc/gitlab-runner
+      - $GITLAB_HOME/var/run/docker.sock:/var/run/docker.sock
     container_name: $GITLAB_RUNNER_NAME
     networks:
       - gitlab_net
