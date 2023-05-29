@@ -35,6 +35,8 @@ Change ``external_url`` to your URL considering [https settings](https://docs.gi
 
 Change registry url if you use registrys.
 
+Add your ssl certificate path in section ``## GitLab HTTPS settings``.
+
 ### Step 4: Reconfigure container
 
 Use ``make reconfigure`` command for change gitlab configuration.
