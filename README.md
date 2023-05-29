@@ -17,6 +17,14 @@ If your use domain or remote server IP, change "localhost" in docker compose fil
 
 Use commands ``make`` or ``make build`` for container building.
 
+Whait some times, because build will take time.
+
+Use ``make ps`` to display container status and ``make logs`` to view build logs.
+
+After successfull build container halthcheck status change to ``(health)``.
+
+After build configure tour project.
+
 ### Step 3: Configure container
 
 Change config file of gitlab:
@@ -25,15 +33,17 @@ Change config file of gitlab:
 
 Change ``external_url`` to your URL considering [https settings](https://docs.gitlab.com/omnibus/settings/ssl.html "setting ssl").
 
-### Step 4: Restat container
+Change registry url if you use registrys.
 
-Use ``make re`` command for container restart.
+### Step 4: Reconfigure container
+
+Use ``make reconfigure`` command for change gitlab configuration.
 
 Use your external url address for access to gitlab.
 
 ### Step 4: Root password
 
-Use
+Use this command to show root password:
 
 ```
 docker exec -it gitlab cat /etc/gitlab/initial_root_password
