@@ -23,9 +23,9 @@ Use ``make ps`` to display container status and ``make logs`` to view build logs
 
 After successfull build container halthcheck status change to ``(health)``.
 
-After build configure tour project.
+After build configure your project.
 
-### Step 3: Configure container
+### Step 3: Configure project
 
 Change config file of gitlab:
 
@@ -37,7 +37,7 @@ Change registry url if you use registrys.
 
 Add your ssl certificate path in section ``## GitLab HTTPS settings``.
 
-### Step 4: Reconfigure container
+### Step 4: Reconfigure gitlab
 
 Use ``make reconfigure`` command for change gitlab configuration.
 
