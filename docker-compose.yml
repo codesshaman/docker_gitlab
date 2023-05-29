@@ -9,6 +9,7 @@ services:
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         external_url "https://$GITLAB_URL:443"
     ports:
+      - "$GITLAB_REGISTRY:5050"
       - "$GITLAB_HTTPS:443"
       - "$GITLAB_HTTP:80"
       - "$GITLAB_SSH:22"
