@@ -26,6 +26,7 @@ help:
 	@echo -e "$(WARN_COLOR)- make logs			: Show logs of gitlab"
 	@echo -e "$(WARN_COLOR)- make ps			: Rebuild configuration"
 	@echo -e "$(WARN_COLOR)- make re			: Rebuild configuration"
+	@echo -e "$(WARN_COLOR)- make reconfigure		: Reconfigure gitlab"
 	@echo -e "$(WARN_COLOR)- make clean			: Cleaning configuration$(NO_COLOR)"
 
 build:
@@ -47,6 +48,10 @@ ps:
 re:	down
 	@printf "$(OK_COLOR)==== Rebuild configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml up -d --build
+
+reconfigure:
+	@printf "$(OK_COLOR)==== Reconfigure ${name}... ====$(NO_COLOR)\n"
+	@docker exec -it --user root gitlab gitlab-ctl reconfigure
 
 clean: down
 	@printf "$(ERROR_COLOR)==== Cleaning configuration ${name}... ====$(NO_COLOR)\n"
