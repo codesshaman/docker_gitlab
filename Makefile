@@ -23,6 +23,7 @@ help:
 	@echo -e "$(WARN_COLOR)- make				: Launch configuration"
 	@echo -e "$(WARN_COLOR)- make build			: Building configuration"
 	@echo -e "$(WARN_COLOR)- make down			: Stopping configuration"
+	@echo -e "$(WARN_COLOR)- make env			: Create envionment file"
 	@echo -e "$(WARN_COLOR)- make logs			: Show logs of gitlab"
 	@echo -e "$(WARN_COLOR)- make ps			: Rebuild configuration"
 	@echo -e "$(WARN_COLOR)- make re			: Rebuild configuration"
@@ -36,6 +37,10 @@ build:
 down:
 	@printf "$(ERROR_COLOR)==== Stopping configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml down
+
+env:
+	@printf "$(OK_COLOR)==== Create new .env ${name}... ====$(NO_COLOR)\n"
+	@bash scripts/env.sh
 
 logs:
 	@printf "$(ERROR_COLOR)==== Show logs ${name}... ====$(NO_COLOR)\n"
