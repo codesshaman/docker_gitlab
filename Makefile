@@ -40,7 +40,7 @@ down:
 
 env:
 	@printf "$(OK_COLOR)==== Create new .env ${name}... ====$(NO_COLOR)\n"
-	@bash scripts/env.sh
+	@cp .env.example .env
 
 logs:
 	@printf "$(ERROR_COLOR)==== Show logs ${name}... ====$(NO_COLOR)\n"
