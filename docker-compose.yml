@@ -1,4 +1,3 @@
-version: '3.5'
 services:
   gitlab:
     image: $GITLAB_VERSION
