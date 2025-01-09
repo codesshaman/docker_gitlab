@@ -20,12 +20,14 @@ all:
 
 help:
 	@echo -e "$(OK_COLOR)==== All commands of ${name} configuration ====$(NO_COLOR)"
-	@echo -e "$(WARN_COLOR)- make				: Launch configuration"
+	@echo -e "$(WARN_COLOR)- make			: Launch configuration"
 	@echo -e "$(WARN_COLOR)- make build			: Building configuration"
 	@echo -e "$(WARN_COLOR)- make down			: Stopping configuration"
 	@echo -e "$(WARN_COLOR)- make env			: Create envionment file"
+	@echo -e "$(WARN_COLOR)- make git			: Set user and mail for git"
 	@echo -e "$(WARN_COLOR)- make logs			: Show logs of gitlab"
 	@echo -e "$(WARN_COLOR)- make ps			: Rebuild configuration"
+	@echo -e "$(WARN_COLOR)- make push			: Push changes to the github"
 	@echo -e "$(WARN_COLOR)- make re			: Rebuild configuration"
 	@echo -e "$(WARN_COLOR)- make reconfigure		: Reconfigure gitlab"
 	@echo -e "$(WARN_COLOR)- make clean			: Cleaning configuration$(NO_COLOR)"
@@ -42,6 +44,10 @@ env:
 	@printf "$(OK_COLOR)==== Create new .env ${name}... ====$(NO_COLOR)\n"
 	@cp .env.example .env
 
+git:
+	@printf "$(YELLOW)==== Set user name and email to git for ${name} repo... ====$(NO_COLOR)\n"
+	@bash scripts/gituser.sh
+
 logs:
 	@printf "$(ERROR_COLOR)==== Show logs ${name}... ====$(NO_COLOR)\n"
 	@docker logs gitlab
@@ -49,6 +55,9 @@ logs:
 ps:
 	@printf "$(OK_COLOR)==== View configuration ${name}... ====$(NO_COLOR)\n"
 	@docker-compose -f ./docker-compose.yml ps
+
+push:
+	@bash scripts/push.sh
 
 re:	down
 	@printf "$(OK_COLOR)==== Rebuild configuration ${name}... ====$(NO_COLOR)\n"
